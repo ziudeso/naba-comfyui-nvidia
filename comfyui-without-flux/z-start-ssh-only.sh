@@ -54,7 +54,7 @@ if [ -d "/workspace/venv" ]; then
 fi
 
 # Check if user's script exists in /workspace
-if [ ! -f /workspace/start_user.sh ]; then
+if [ ! -f /workspace/start_user.sh ] || [ "$OVERWRITE_START_SCRIPT" = "1"] ; then
     # If not, copy the original script to /workspace
     cp /start-original.sh /workspace/start_user.sh
 fi
