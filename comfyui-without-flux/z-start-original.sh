@@ -11,9 +11,9 @@ bash /update_Workflows.sh
 bash /disable_mixlab.sh
 
 # Mine
-echo COMFY_CMDLINE_ARGS: ${COMFY_CMDLINE_ARGS}
 create_and_set_permissions() {
     local dir_path="$1"
+    echo "Calling create_and_set_permissions for $dir_path"
     if [[ ! -d "$dir_path" ]]; then
         echo "Creating directory: $dir_path"
         mkdir -p "$dir_path"
