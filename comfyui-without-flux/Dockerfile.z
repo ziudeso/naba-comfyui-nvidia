@@ -252,12 +252,13 @@ EXPOSE 8888
 RUN mkdir -p /ComfyUI/models/checkpoints && \
     wget "https://huggingface.co/Comfy-Org/stable-diffusion-v1-5-archive/resolve/main/v1-5-pruned-emaonly-fp16.safetensors?download=true" -O /ComfyUI/models/checkpoints/v1-5-pruned-emaonly-fp16.safetensors
 
-# MINE: edited (z-)
+# MINE: edited (z-) (moved from above)
 COPY --chmod=755 z-start-ssh-only.sh /start.sh
 COPY --chmod=755 z-start-original.sh /start-original.sh
 COPY --chmod=755 comfyui-on-workspace.sh /comfyui-on-workspace.sh
 COPY --chmod=755 ai-toolkit-on-workspace.sh /ai-toolkit-on-workspace.sh
 COPY --chmod=755 check_files.sh /check_files.sh
+
 # start.sh = start-ssh-only.sh which invokes start-original.sh (copied as start_user.sh)
 # env variables supported:
 #   PUBLIC_KEY
