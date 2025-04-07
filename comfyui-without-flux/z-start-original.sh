@@ -12,11 +12,22 @@ bash /disable_mixlab.sh
 
 # Mine
 echo COMFY_CMDLINE_ARGS: ${COMFY_CMDLINE_ARGS}
+create_and_set_permissions() {
+    local dir_path="$1"
+    if [[ ! -d "$dir_path" ]]; then
+        echo "Creating directory: $dir_path"
+        sudo mkdir -p "$dir_path"
+    fi
+    echo "Setting permissions to 777 for: $dir_path"
+    sudo chmod 777 "$dir_path"
+}
+
 COMFY_CMDLINE_ARGS=""
-[[ -n "$OUTPUT_DIRECTORY" ]] && COMFY_CMDLINE_ARGS+=" --output-directory ${OUTPUT_DIRECTORY}"
-[[ -n "$INPUT_DIRECTORY" ]] && COMFY_CMDLINE_ARGS+=" --input-directory ${INPUT_DIRECTORY}"
-[[ -n "$TEMP_DIRECTORY" ]] && COMFY_CMDLINE_ARGS+=" --temp-directory ${TEMP_DIRECTORY}"
-[[ -n "$USER_DIRECTORY" ]] && COMFY_CMDLINE_ARGS+=" --user-directory ${USER_DIRECTORY}"
+if [[ -n "$OUTPUT_DIRECTORY" ]]; then create_and_set_permissions "$OUTPUT_DIRECTORY"; COMFY_CMDLINE_ARGS+=" --output-directory ${OUTPUT_DIRECTORY}"; fi
+if [[ -n "$INPUT_DIRECTORY" ]]; then create_and_set_permissions "$INPUT_DIRECTORY"; COMFY_CMDLINE_ARGS+=" --input-directory ${INPUT_DIRECTORY}"; fi
+if [[ -n "$TEMP_DIRECTORY" ]]; then create_and_set_permissions "$TEMP_DIRECTORY"; COMFY_CMDLINE_ARGS+=" --temp-directory ${TEMP_DIRECTORY}"; fi
+if [[ -n "$USER_DIRECTORY" ]]; then create_and_set_permissions "$USER_DIRECTORY"; COMFY_CMDLINE_ARGS+=" --user-directory ${USER_DIRECTORY}"; fi
+
 # Launch the UI
 python3 /workspace/ComfyUI/main.py --listen ${COMFY_CMDLINE_ARGS}
 
