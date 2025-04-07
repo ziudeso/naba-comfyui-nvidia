@@ -10,8 +10,14 @@ bash /update_Workflows.sh
 # But can be enabled if needed by commenting out the following line.
 bash /disable_mixlab.sh
 
-# Launch the UI
+# Mine
 echo COMFY_CMDLINE_ARGS: ${COMFY_CMDLINE_ARGS}
+COMFY_CMDLINE_ARGS=""
+[[ -n "$OUTPUT_DIRECTORY" ]] && COMFY_CMDLINE_ARGS+=" --output-directory ${OUTPUT_DIRECTORY}"
+[[ -n "$INPUT_DIRECTORY" ]] && COMFY_CMDLINE_ARGS+=" --input-directory ${INPUT_DIRECTORY}"
+[[ -n "$TEMP_DIRECTORY" ]] && COMFY_CMDLINE_ARGS+=" --temp-directory ${TEMP_DIRECTORY}"
+[[ -n "$USER_DIRECTORY" ]] && COMFY_CMDLINE_ARGS+=" --user-directory ${USER_DIRECTORY}"
+# Launch the UI
 python3 /workspace/ComfyUI/main.py --listen ${COMFY_CMDLINE_ARGS}
 
 # Keep the container running indefinitely
