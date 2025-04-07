@@ -11,6 +11,7 @@ bash /update_Workflows.sh
 bash /disable_mixlab.sh
 
 # Launch the UI
+echo COMFY_CMDLINE_ARGS: ${COMFY_CMDLINE_ARGS}
 python3 /workspace/ComfyUI/main.py --listen ${COMFY_CMDLINE_ARGS}
 
 # Keep the container running indefinitely
