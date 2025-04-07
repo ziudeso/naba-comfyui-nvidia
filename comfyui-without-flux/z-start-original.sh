@@ -16,10 +16,10 @@ create_and_set_permissions() {
     local dir_path="$1"
     if [[ ! -d "$dir_path" ]]; then
         echo "Creating directory: $dir_path"
-        sudo mkdir -p "$dir_path"
+        mkdir -p "$dir_path"
     fi
     echo "Setting permissions to 777 for: $dir_path"
-    sudo chmod 777 "$dir_path"
+    chmod 777 "$dir_path"
 }
 
 COMFY_CMDLINE_ARGS=""
